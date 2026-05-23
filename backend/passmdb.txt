@@ -1,0 +1,98 @@
+html da aula 04
+https://drive.google.com/file/d/18CvR...
+
+js da aula 04
+https://drive.google.com/file/d/1YgE-...
+
+Links extras:
+https://developer.mozilla.org/pt-BR/d...
+https://developer.mozilla.org/pt-BR/d...
+https://developer.mozilla.org/pt-BR/d...
+
+
+
+Aker@2185!
+
+
+SENHA MONGODB BANCO TRABALHDORES
+cHSwKkUvByplejbB
+
+USERNAME
+gcsilvab_db_user
+gcsilvab_db_user
+
+
+mongodb+srv://gcsilvab_db_user:xEehaOrAd5ZuIMed@worker.9o10ctx.mongodb.net/Workers?appName=worker
+
+mongodb://giocs:d6FmGS9hYMTOjHZI@ac-nxsqkw9-shard-00-00.mqpb3c1.mongodb.net:27017,ac-nxsqkw9-shard-00-01.mqpb3c1.mongodb.net:27017,ac-nxsqkw9-shard-00-02.mqpb3c1.mongodb.net:27017/Workers?ssl=true&replicaSet=atlas-4cs70k-shard-0&authSource=admin&appName=Workers
+
+mongodb+srv://giocs:xEehaOrAd5ZuIMed@workers.mqpb3c1.mongodb.net/Workers?appName=Workers
+ npm install prisma@6.19@ --save-dev
+
+
+https://github.com/digitalinnovationone/formacao-nodejs/tree/main/03-projeto-mario-kart
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+ model Worker { 
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  email String @unique
+  name  String
+  function String
+  hiringDate DateTime
+  
+} 
+
+
+
+import express from 'express'
+import {PrismaClient} from '@prisma/client'
+
+const app = express()
+const prisma = new PrismaClient()
+const port = 3000
+app.use(express.json())
+
+// rota para mostrar colaborador cadastrado
+app.get('/workers', (req,res)=>{
+
+    res.send('hello word')
+})
+
+// rota para  cadastrar colaborador
+app.post('/workers',async (req,res)=>{
+  await prisma.worker.create({
+  data:{
+    email : req.body.email,
+    name : req.body.name,
+    function : req.body.function,
+    hiringDate 
+  }
+})
+ res.status.send(200).json({workers})
+    
+})
+
+// rota para alterar o cadasto do colaborador
+app.put('/workers', (req, res) => {
+  res.send('Got a PUT request at /user')
+})
+
+// rota para deletar o cadasto do colaborador
+app.delete('/workers', (req, res) => {
+  res.send('Got a DELETE request at /user')
+})
+
+
+
+
+
+app.listen(port)
